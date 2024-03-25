@@ -3,7 +3,7 @@ import csv
 
 def read_csv(file_name):
     with open(file_name, 'r', newline='') as file:
-        reader = csv.reader(file, delimiter=';')  # Ustawienie separatora na średnik
+        reader = csv.reader(file, delimiter=';')
         return list(reader)
     
 def modify_csv(data, changes):
@@ -13,15 +13,15 @@ def modify_csv(data, changes):
     for change in changes:
         parts = change.split(',')
         if len(parts) != 3:
-            print(f"Ostrzeżenie: Nieprawidłowy format zmiany: '{change}'. Pomijam tę zmianę.")
+            print(f"Nieprawidłowy format zmiany: '{change}'. Pomijam tę zmianę.")
             continue
         
         x, y, value = map(str.strip, parts)
-        x, y = int(x)+1, int(y)+1  # Zwiększ wartości współrzędnych o 1
+        x, y = int(x)+1, int(y)+1
         if 1 <= x <= max_cols and 1 <= y <= max_rows:
-            data[y-1][x-1] = value  # Zmniejsz wartości współrzędnych o 1
+            data[y-1][x-1] = value
         else:
-            print(f"Ostrzeżenie: Zmiana '{change}' znajduje się poza zakresem pliku CSV.")
+            print(f"Zmiana '{change}' znajduje się poza zakresem pliku CSV.")
 
 def write_csv(data, file_name):
     with open(file_name, 'w', newline='') as file:
